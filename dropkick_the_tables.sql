@@ -1,0 +1,15 @@
+DROP TABLE Complaints_Status;
+DROP TABLE Complaints_On_Bookstore;
+DROP TABLE Complaints_On_Order;
+DROP TABLE Complaints;
+DROP TABLE Items_In_Order_Status;
+DROP TABLE Items_In_Order;
+DROP TABLE Orders;
+DROP TABLE Customers;
+DROP TABLE Price_History;
+DROP TABLE Stocks_In_Bookstore;
+DROP TABLE Bookstore;
+DROP TABLE Employees;
+DROP TABLE Magazines;
+DROP TABLE Books;
+DROP TABLE Publication;
