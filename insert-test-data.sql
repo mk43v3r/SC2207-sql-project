@@ -1,6 +1,6 @@
-DELETE FROM Publication;
 DELETE FROM Magazines;
 DELETE FROM Books;
+DELETE FROM Publication;
 DELETE FROM Employees;
 DELETE FROM Bookstore;
 DELETE FROM Customers;
