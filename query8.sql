@@ -9,11 +9,11 @@ JOIN Orders AS O ON IIO.OrderID = O.OrderID
 WHERE MONTH(O.Order_Date_Time) = 8 AND YEAR(O.Order_Date_Time) = 2022
 AND PUB.PubID NOT IN(
     ---- publications purchased in July 2022
-	SELECT DISTINCT SIB.PubID
+	SELECT DISTINCT SIB2.PubID
 	FROM Stocks_In_Bookstore AS SIB2 
 	JOIN Items_In_Order AS IIO2 ON IIO2.StockID = SIB2.StockID
 	JOIN Orders AS O2 ON IIO2.OrderID = O2.OrderID
-	WHERE MONTH(O.Order_Date_Time) = 7 AND YEAR(O.Order_Date_Time) = 2022
+	WHERE MONTH(O2.Order_Date_Time) = 7 AND YEAR(O2.Order_Date_Time) = 2022
 )
 GROUP BY PUB.PubID
 ORDER BY COUNT(*) DESC 

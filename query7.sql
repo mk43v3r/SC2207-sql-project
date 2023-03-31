@@ -16,7 +16,7 @@ FROM CustomerComplaints AS A
 WHERE A.Complaints_Count = (SELECT MAX(B.Complaints_Count) FROM CustomerComplaints AS B)
 GO
 
-SELECT M.CustomerID, P.PubID
+SELECT DISTINCT M.CustomerID, P.PubID
 FROM MaxCustomerComplaints AS M
 JOIN Orders AS O ON M.CustomerID = O.CustomerID
 JOIN Items_In_Order AS I ON O.OrderID = I.OrderID

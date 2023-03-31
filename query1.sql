@@ -5,5 +5,7 @@ FROM Books AS B
 JOIN Stocks_In_Bookstore AS S ON B.PubID = S.PubID
 JOIN Price_History AS P ON S.StockID = P.StockID
 WHERE (B.Title = 'Harry Porter Finale' AND
-	    P.Start_Date >= '2022/08/01' AND
-	    P.Start_Date <= '2022/08/31')
+	    P.Start_Date >= '2022-08-01' AND
+	    P.Start_Date <= '2022-08-31')
+
+DELETE FROM Price_History;

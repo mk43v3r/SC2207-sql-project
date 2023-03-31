@@ -3,7 +3,7 @@
 SELECT SIB.PubID, AVG(IIO.Feedback_Rating) AS Average_Rating
 FROM Stocks_In_Bookstore as SIB
 JOIN Items_In_Order as IIO ON SIB.StockID = IIO.StockID 
-WHERE IIO.Feedback_Date_Time LIKE '2022-08%'
+WHERE MONTH(IIO.Feedback_Date_Time) = 8 AND YEAR(IIO.Feedback_Date_Time) = 2022
 GROUP BY SIB.PubID
 HAVING EXISTS(
 	SELECT *
