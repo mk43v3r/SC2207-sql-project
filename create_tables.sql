@@ -113,7 +113,7 @@ CREATE TABLE Complaints(
 ComplaintID INT,
 CustomerID INT,
 Text VARCHAR(150) CHECK(Text <> ''),
-Filed_Date_Time DATETIME,
+Filed_Date_Time DATETIME NOT NULL,
 EmployeeID INT,
 Handled_Date_Time DATETIME,
 PRIMARY KEY(ComplaintID),
@@ -145,7 +145,6 @@ ComplaintID INT,
 Date DATE,
 -- Posssible States:
 -- "Pending"
--- "Being Handled"
 -- "Addressed"
 State VARCHAR(50) CHECK(State <> ''),
 PRIMARY KEY(ComplaintID, Date),
