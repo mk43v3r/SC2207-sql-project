@@ -1,5 +1,6 @@
 -- 6. Find bookstores that made the most revenue in August 2022.
 SELECT TOP 1 B.BookstoreID, SUM(I.Item_Price * I.Item_Qty) AS Revenue
+-- SELECT B.BookstoreID, I.Item_Price, I.Item_Price
 FROM Items_In_Order AS I
 JOIN Orders AS O ON I.OrderID = O.OrderID
 JOIN Stocks_In_Bookstore AS S ON I.StockID = S.StockID

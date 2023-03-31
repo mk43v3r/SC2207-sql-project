@@ -44,7 +44,10 @@ PubID INT,
 BookstoreID INT,
 PRIMARY KEY(StockID),
 FOREIGN KEY(BookstoreID) REFERENCES Bookstore(BookstoreID),
-FOREIGN KEY(PubID) REFERENCES Publication(PubID)
+FOREIGN KEY(PubID) REFERENCES Publication(PubID),
+--- Doesn't make sense for the same publication to be selling at the 
+--- same bookstore mutiple times (we have stock_qty for that)
+CONSTRAINT UNQ_PAIR UNIQUE (PubID, BookstoreID)
 );
 
 

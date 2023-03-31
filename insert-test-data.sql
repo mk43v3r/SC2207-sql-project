@@ -1,3 +1,5 @@
+DELETE FROM Items_In_Order;
+DELETE FROM Stocks_In_Bookstore;
 DELETE FROM Complaints_On_Bookstore;
 DELETE FROM Complaints_On_Order;
 DELETE FROM Orders;
@@ -102,11 +104,11 @@ VALUES
 Insert INTO Orders(OrderID, CustomerID, Order_Date_time, Shipping_address, Shipping_cost)
 VALUES
 	(1, 1, '2021-04-01', 'address_1', 0),
-	(2, 2, '2021-05-07', 'address_2', 50.0),
+	(2, 2, '2022-08-25', 'address_2', 50.0),
 	(3, 3, '2023-02-22', 'address_3', 25.0),
 	(4, 4, '2021-09-17', 'address_4', 15.0),
 	(5, 1, '2021-12-19', 'address_5', 30.0),
-	(6, 2, '2022-04-03', 'address_6', 0);
+	(6, 2, '2022-08-03', 'address_6', 0);
 
 
 INSERT INTO Complaints_On_Order(ComplaintID, OrderID)
@@ -125,3 +127,43 @@ VALUES
 	(6, 3),
 	(8, 4),
 	(10, 1);
+
+INSERT INTO Stocks_In_Bookstore(StockID, Stock_Price, Stock_Qty, PubID, BookstoreID)
+VALUES
+	(1, 1.0, 7, 1, 1),
+	(2, 2.0, 10, 1, 2),
+	(3, 13.0, 0, 1, 3),
+	(4, 13.0, 4, 6, 4),
+	(5, 2.0, 5, 4, 4),
+	(6, 34.0, 20, 2, 1),
+	(7, 1.0, 2, 5, 3),
+	(8, 23.0, 18, 5, 4),
+	(9, 13.0, 25, 4, 1),
+	(10, 10.0, 1, 4, 2),
+	(11, 1.0, 7, 2, 4),
+	(12, 20.0, 10, 3, 3),
+	(13, 3.0, 0, 4, 3),
+	(14, 11.0, 4, 6, 2),
+	(15, 2.0, 5, 3, 4),
+	(16, 3.0, 20, 2, 2);
+
+INSERT INTO Items_In_Order(ItemID, StockID, OrderID, Item_Price, Item_Qty,
+							Delivery_Date, Feedback_Date_Time, Feedback_Comment,
+							Feedback_Rating)
+VALUES
+	(1, 1, 1, 3.0, 3, NULL, NULL, NULL, NULL),
+	(2, 2, 3, 5.0, 6, '2023-03-23', '2023-03-25', 'comment', 3),
+	(3, 3, 4, 27.0, 2, '2022-11-11', '2022-12-20', NULL, NULL),
+	(4, 4, 5, 28.0, 2, '2022-10-06', '2022-10-18', 'comment', 5),
+	(5, 5, 6, 15.0, 3, NULL, NULL, NULL, NULL),
+	(6, 6, 1, 1.0, 4, '2022-08-23', '2022-09-22', 'comment', 1),
+	(7, 7, 2, 28.0, 2, '2022-11-11', '2022-12-20', NULL, NULL),
+	(8, 8, 1, 3.0, 3, '2022-03-06', '2022-07-18', 'comment', 4),
+	(9, 11, 3, 5.0, 2, NULL, NULL, NULL, NULL),
+	(10, 12, 4, 15.0, 1, '2022-01-23', '2022-02-22', 'comment', 5),
+	(11, 7, 4, 5.0, 5, '2022-11-11', '2022-12-20', NULL, NULL),
+	(12, 13, 6, 13.0, 7, '2022-09-06', '2022-10-18', 'comment', 3),
+	(13, 15, 1, 28.0, 3, NULL, NULL, NULL, NULL),
+	(14, 16, 2, 15.0, 1, '2022-08-27', '2022-09-22', 'comment', 2),
+	(15, 14, 6, 27.0, 2, '2022-11-11', '2022-12-20', NULL, NULL),
+	(16, 9, 5, 28.0, 1, '2022-03-06', '2022-07-18', 'comment', 4);

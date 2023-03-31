@@ -26,6 +26,7 @@ WHERE I.Item_Price >= ALL (SELECT I2.Item_Price
 							FROM Orders AS O2
 							JOIN Items_In_Order AS I2 ON O2.OrderID = I2.OrderID
 							WHERE M.CustomerID = O2.CustomerID)
+ORDER BY M.CustomerID DESC , P.PubID DESC
 
 -- Ensure views are cleaned up after queries
 DROP VIEW MaxCustomerComplaints
