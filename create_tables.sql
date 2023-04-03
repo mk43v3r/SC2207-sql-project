@@ -13,6 +13,7 @@ Title VARCHAR(50)  CHECK(Title <> ''),
 PRIMARY KEY(PubID),
 FOREIGN KEY(PubID) REFERENCES Publication(PubID)
 ON DELETE CASCADE
+ON UPDATE CASCADE
 );
 
 
@@ -23,6 +24,7 @@ Issue INT CHECK(Issue > 0),
 PRIMARY KEY(PubID),
 FOREIGN KEY(PubID) REFERENCES Publication(PubID)
 ON DELETE CASCADE
+ON UPDATE CASCADE
 );
 
 
@@ -47,7 +49,8 @@ BookstoreID INT,
 PRIMARY KEY(StockID),
 FOREIGN KEY(BookstoreID) REFERENCES Bookstore(BookstoreID),
 FOREIGN KEY(PubID) REFERENCES Publication(PubID)
-ON DELETE CASCADE,
+ON DELETE CASCADE
+ON UPDATE CASCADE,
 --- Doesn't make sense for the same publication to be selling at the 
 --- same bookstore mutiple times (we have stock_qty for that)
 CONSTRAINT UNQ_PAIR UNIQUE (PubID, BookstoreID)
@@ -62,7 +65,8 @@ Start_date DATE CHECK(Start_date <= GETDATE()),
 End_date DATE,
 PRIMARY KEY(StockID, Price, Start_Date, End_Date),
 FOREIGN KEY(StockID) REFERENCES Stocks_In_Bookstore(StockID)
-ON DELETE CASCADE,
+ON DELETE CASCADE
+ON UPDATE CASCADE,
 CHECK(End_date >= Start_date)
 );
 
@@ -82,6 +86,7 @@ Shipping_cost FLOAT CHECK(Shipping_cost >= 0),
 PRIMARY KEY(OrderID),
 FOREIGN KEY(CustomerID) REFERENCES Customers(CustomerID)
 ON DELETE CASCADE
+ON UPDATE CASCADE
 );
 
 CREATE TABLE Items_In_Order(
@@ -99,7 +104,8 @@ Feedback_Rating INT Check(Feedback_Rating >= 1 AND Feedback_Rating <= 5),
 PRIMARY KEY(ItemID),
 FOREIGN KEY(StockID) REFERENCES Stocks_In_Bookstore(StockID),
 FOREIGN KEY(OrderID) REFERENCES Orders(OrderID)
-ON DELETE CASCADE,
+ON DELETE CASCADE
+ON UPDATE CASCADE,
 -- a customer should only be able to give feedback after he/she has received the item
 CHECK(Feedback_Date_Time >= Delivery_date)
 ); 
@@ -117,6 +123,7 @@ State VARCHAR(50) CHECK(State <> ''),
 PRIMARY KEY(Date, ItemID),
 FOREIGN KEY (ItemID) REFERENCES Items_In_Order(ItemID)
 ON DELETE CASCADE
+ON UPDATE CASCADE
 );
 
 CREATE TABLE Complaints(
@@ -129,7 +136,8 @@ Handled_Date_Time DATETIME,
 PRIMARY KEY(ComplaintID),
 FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
 FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID)
-ON DELETE CASCADE,
+ON DELETE CASCADE
+ON UPDATE CASCADE,
 -- the complaint should only be handled after it has been filed
 CHECK(Handled_Date_Time >= Filed_Date_Time)
 );
@@ -141,6 +149,7 @@ PRIMARY KEY(ComplaintID),
 FOREIGN KEY(ComplaintID) REFERENCES Complaints(ComplaintID),
 FOREIGN KEY(OrderID) REFERENCES Orders(OrderID)
 ON DELETE CASCADE
+ON UPDATE CASCADE
 );
 
 CREATE TABLE Complaints_On_Bookstore(
@@ -150,6 +159,7 @@ PRIMARY KEY(ComplaintID),
 FOREIGN KEY(ComplaintID) REFERENCES Complaints(ComplaintID),
 FOREIGN KEY(BookstoreID) REFERENCES Bookstore(BookstoreID)
 ON DELETE CASCADE
+ON UPDATE CASCADE
 );
 
 
@@ -163,4 +173,5 @@ State VARCHAR(50) CHECK(State <> ''),
 PRIMARY KEY(ComplaintID, Date),
 FOREIGN KEY(ComplaintID) REFERENCES Complaints(ComplaintID)
 ON DELETE CASCADE
+ON UPDATE CASCADE
 );
