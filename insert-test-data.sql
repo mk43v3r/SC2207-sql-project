@@ -191,6 +191,13 @@ VALUES
 	(35, 10, 5, 28.0, 5, '2022-07-06', '2022-08-18', 'comment', 5),
 	(36, 10, 5, 28.0, 1, '2022-07-06', '2022-08-18', 'comment', 5);
 
+INSERT INTO Items_In_Order(ItemID, StockID, OrderID, Item_Price, Item_Qty,
+							Delivery_Date, Feedback_Date_Time, Feedback_Comment,
+							Feedback_Rating)
+VALUES
+    -- add rating of 4 to StockID 9 to show the ordering
+    (37, 9, 5, 28, 1, '2022-07-06', '2022-08-18 00:00:00.000', 'comment', 4)
+
 
 INSERT INTO Price_History(StockID, Price, Start_date, End_date)
 VALUES
@@ -258,6 +265,23 @@ VALUES
 	(16, 3.0, '2023-03-01', '2023-03-31'),
 	(16, 3.0, '2022-08-01', '2023-02-28'),
 	(16, 1.0, '2022-07-01', '2022-07-30');
+
+
+INSERT INTO Price_History
+VALUES(1,15,'2022/08/16', '2022/09/15');
+INSERT INTO Price_History
+VALUES(1,10,'2022/08/01', '2022/08/15');
+INSERT INTO Price_History
+VALUES(2,8,'2022/08/09', '2022/08/31');
+INSERT INTO Price_History
+VALUES(2,12,'2022/08/02', '2022/08/08');
+INSERT INTO Price_History
+VALUES(2,15,'2022/07/16', '2022/08/01');
+INSERT INTO Price_History
+VALUES(3,11,'2022/07/09', '2022/09/15');
+INSERT INTO Price_History
+VALUES(4,11,'2022/07/09', '2022/09/15');
+
 
 INSERT INTO Items_In_Order_Status(Date, ItemID, State)
 ((SELECT CAST(O.Order_Date_Time AS DATE), ItemID, 'Shipped'

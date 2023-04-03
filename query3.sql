@@ -1,6 +1,7 @@
 -- 3. For all publications purchased in June 2022 that have been
 -- delivered, find the average time from the ordering date to the
 -- delivery date.
+-- Average Time is in days.
 
 SELECT AVG(DATEDIFF(day, O.Order_Date_time, IIO.Delivery_date)) as Average_Delivery_Time
 FROM Orders O
