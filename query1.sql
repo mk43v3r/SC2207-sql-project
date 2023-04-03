@@ -8,7 +8,7 @@ WHERE (B.Title = 'Harry Porter Finale' AND
 		((P.Start_date >= '2022/08/01' AND P.Start_date<= '2022/08/31')
 		OR (P.Start_date <= '2022/08/31' AND P.End_date >= '2022/08/01')));
 
-/*Already in DB
+/*
 
 INSERT INTO Price_History
 VALUES(1,15,'2022/08/16', '2022/09/15');
