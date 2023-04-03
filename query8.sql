@@ -1,7 +1,7 @@
 -- 8. Find publications that have never been purchased by any customer 
 -- in July 2022, but are the top 3 most purchased publications in August 2022.
 
-SELECT TOP 3 PUB.PubID
+SELECT TOP 3 PUB.PubID, Count(*) AS PURCHASE_COUNT
 FROM Publication AS PUB
 JOIN Stocks_In_Bookstore AS SIB ON PUB.PubID = SIB.PubID
 JOIN Items_In_Order AS IIO ON SIB.StockID = IIO.StockID
