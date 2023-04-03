@@ -48,12 +48,12 @@ PubID INT,
 BookstoreID INT,
 PRIMARY KEY(StockID),
 FOREIGN KEY(BookstoreID) REFERENCES Bookstore(BookstoreID),
-FOREIGN KEY(PubID) REFERENCES Publication(PubID),
+FOREIGN KEY(PubID) REFERENCES Publication(PubID)
+ON DELETE CASCADE
+ON UPDATE CASCADE,
 --- Doesn't make sense for the same publication to be selling at the 
 --- same bookstore mutiple times (we have stock_qty for that)
 CONSTRAINT UNQ_PAIR UNIQUE (PubID, BookstoreID)
-ON DELETE CASCADE
-ON UPDATE CASCADE
 );
 
 
@@ -64,10 +64,10 @@ Price REAL CHECK(Price >= 0),
 Start_date DATE CHECK(Start_date <= GETDATE()),
 End_date DATE,
 PRIMARY KEY(StockID, Price, Start_Date, End_Date),
-FOREIGN KEY(StockID) REFERENCES Stocks_In_Bookstore(StockID),
-CHECK(End_date >= Start_date),
+FOREIGN KEY(StockID) REFERENCES Stocks_In_Bookstore(StockID)
 ON DELETE CASCADE
-ON UPDATE CASCADE
+ON UPDATE CASCADE,
+CHECK(End_date >= Start_date)
 );
 
 CREATE TABLE Customers(
@@ -103,11 +103,11 @@ Feedback_Comment Varchar(150),
 Feedback_Rating INT Check(Feedback_Rating >= 1 AND Feedback_Rating <= 5), 
 PRIMARY KEY(ItemID),
 FOREIGN KEY(StockID) REFERENCES Stocks_In_Bookstore(StockID),
-FOREIGN KEY(OrderID) REFERENCES Orders(OrderID),
--- a customer should only be able to give feedback after he/she has received the item
-CHECK(Feedback_Date_Time >= Delivery_date),
+FOREIGN KEY(OrderID) REFERENCES Orders(OrderID)
 ON DELETE CASCADE
-ON UPDATE CASCADE
+ON UPDATE CASCADE,
+-- a customer should only be able to give feedback after he/she has received the item
+CHECK(Feedback_Date_Time >= Delivery_date)
 ); 
 
 
@@ -135,11 +135,11 @@ EmployeeID INT,
 Handled_Date_Time DATETIME,
 PRIMARY KEY(ComplaintID),
 FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
-FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID),
+FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID)
+ON DELETE CASCADE
+ON UPDATE CASCADE,
 -- the complaint should only be handled after it has been filed
 CHECK(Handled_Date_Time >= Filed_Date_Time)
-ON DELETE CASCADE
-ON UPDATE CASCADE
 );
 
 CREATE TABLE Complaints_On_Order(
