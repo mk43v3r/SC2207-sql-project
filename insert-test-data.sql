@@ -199,6 +199,19 @@ VALUES
     (37, 9, 5, 28, 1, '2022-07-06', '2022-08-18 00:00:00.000', 'comment', 4)
 
 
+-- Current dataset has no publication with increasing sales over at least 3 months
+-- Thus, data is inserted to satisfy query
+INSERT INTO Items_In_Order(ItemID, StockID, OrderID, Item_Price, Item_Qty,
+							Delivery_Date, Feedback_Date_Time, Feedback_Comment,
+							Feedback_Rating)
+VALUES
+    -- add 2 sales for PubID 1 on Jul
+    -- add 5 sales for PubID 2 on Aug
+    (38, 3, 2, 13, 5, '2022-09-09', null, null, null),
+    -- add 4 sales for PubID 5 on Aug
+    (39, 8, 2, 23, 4, '2022-09-09', null, null, null);
+
+
 INSERT INTO Price_History(StockID, Price, Start_date, End_date)
 VALUES
 
