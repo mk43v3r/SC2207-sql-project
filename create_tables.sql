@@ -12,6 +12,7 @@ PubID INT,
 Title VARCHAR(50)  CHECK(Title <> ''),
 PRIMARY KEY(PubID),
 FOREIGN KEY(PubID) REFERENCES Publication(PubID)
+ON DELETE CASCADE
 );
 
 
@@ -21,6 +22,7 @@ Title VARCHAR(50) CHECK(Title <> ''),
 Issue INT CHECK(Issue > 0),
 PRIMARY KEY(PubID),
 FOREIGN KEY(PubID) REFERENCES Publication(PubID)
+ON DELETE CASCADE
 );
 
 
@@ -48,6 +50,7 @@ FOREIGN KEY(PubID) REFERENCES Publication(PubID),
 --- Doesn't make sense for the same publication to be selling at the 
 --- same bookstore mutiple times (we have stock_qty for that)
 CONSTRAINT UNQ_PAIR UNIQUE (PubID, BookstoreID)
+ON DELETE CASCADE
 );
 
 
@@ -60,6 +63,7 @@ End_date DATE,
 PRIMARY KEY(StockID, Price, Start_Date, End_Date),
 FOREIGN KEY(StockID) REFERENCES Stocks_In_Bookstore(StockID),
 CHECK(End_date >= Start_date),
+ON DELETE CASCADE
 );
 
 CREATE TABLE Customers(
@@ -77,6 +81,7 @@ Shipping_address VARCHAR(150) CHECK(Shipping_address <> ''),
 Shipping_cost FLOAT CHECK(Shipping_cost >= 0),
 PRIMARY KEY(OrderID),
 FOREIGN KEY(CustomerID) REFERENCES Customers(CustomerID)
+ON DELETE CASCADE
 );
 
 CREATE TABLE Items_In_Order(
@@ -96,6 +101,7 @@ FOREIGN KEY(StockID) REFERENCES Stocks_In_Bookstore(StockID),
 FOREIGN KEY(OrderID) REFERENCES Orders(OrderID),
 -- a customer should only be able to give feedback after he/she has received the item
 CHECK(Feedback_Date_Time >= Delivery_date),
+ON DELETE CASCADE
 ); 
 
 
@@ -110,6 +116,7 @@ ItemID INT,
 State VARCHAR(50) CHECK(State <> ''),
 PRIMARY KEY(Date, ItemID),
 FOREIGN KEY (ItemID) REFERENCES Items_In_Order(ItemID)
+ON DELETE CASCADE
 );
 
 CREATE TABLE Complaints(
@@ -124,6 +131,7 @@ FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
 FOREIGN KEY (EmployeeID) REFERENCES Employees(EmployeeID),
 -- the complaint should only be handled after it has been filed
 CHECK(Handled_Date_Time >= Filed_Date_Time)
+ON DELETE CASCADE
 );
 
 CREATE TABLE Complaints_On_Order(
@@ -132,6 +140,7 @@ OrderID INT,
 PRIMARY KEY(ComplaintID),
 FOREIGN KEY(ComplaintID) REFERENCES Complaints(ComplaintID),
 FOREIGN KEY(OrderID) REFERENCES Orders(OrderID)
+ON DELETE CASCADE
 );
 
 CREATE TABLE Complaints_On_Bookstore(
@@ -140,6 +149,7 @@ BookstoreID INT,
 PRIMARY KEY(ComplaintID),
 FOREIGN KEY(ComplaintID) REFERENCES Complaints(ComplaintID),
 FOREIGN KEY(BookstoreID) REFERENCES Bookstore(BookstoreID)
+ON DELETE CASCADE
 );
 
 
@@ -152,4 +162,5 @@ Date DATE,
 State VARCHAR(50) CHECK(State <> ''),
 PRIMARY KEY(ComplaintID, Date),
 FOREIGN KEY(ComplaintID) REFERENCES Complaints(ComplaintID)
+ON DELETE CASCADE
 );
